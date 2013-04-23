@@ -1,0 +1,20 @@
+<% if notice %>
+<p id="notice"><%= notice %></p>
+<% end %>
+<h1>Choose UR Dream ones</h1>
+<table>
+<% @products.each do |product| %>
+<div class="entry">
+<tr><td>
+<%= image_tag(product.image_url) %></td>
+<td><h3><%= product.title %></h3></td>
+<td><%=sanitize product.description %></td>
+<div class="price_line">
+<span class="price"><td><%= number_to_currency(product.price) %></td></span>
+<td><%= button_to 'Add to Cart', line_items_path(:product_id => product) %></td></tr>
+</div>
+</div>
+
+<% end %>
+</table>
+
