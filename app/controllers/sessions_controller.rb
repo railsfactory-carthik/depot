@@ -8,7 +8,7 @@ class SessionsController < ApplicationController
   if user = User.authenticate(params[:name], params[:password])
   session[:user_id] = user.id
  # find = User.find_by_id(session[:user_id])
-  p 111111111111111111111111111111
+  
   #p find
   p session[:user_id]      = user.id
      session[:user_name] = user.name

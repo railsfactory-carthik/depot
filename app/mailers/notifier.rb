@@ -7,9 +7,10 @@ default from: "from@example.com"
   #   en.notifier.order_received.subject
   #
   def order_received
+p 44444444444444
     @greeting = "Hi"
 
-    mail to: "to@example.org"
+    mail to: "karthikv@railsfactory.org"
   end
 
   # Subject can be set in your I18n file at config/locales/en.yml

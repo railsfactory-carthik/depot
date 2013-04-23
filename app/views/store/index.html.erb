@@ -6,7 +6,7 @@
 <% @products.each do |product| %>
 <div class="entry">
 <tr><td>
-<%= image_tag(product.image_url) %></td>
+<%= image_tag(product.image_url, :height => "30px") %></td>
 <td><h3><%= product.title %></h3></td>
 <td><%=sanitize product.description %></td>
 <div class="price_line">
