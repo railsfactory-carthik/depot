@@ -5,7 +5,10 @@ class SessionsController < ApplicationController
   end
 
   def create
+    p 1111111111111111111111111111111111
+
   if user = User.authenticate(params[:name], params[:password])
+     
   session[:user_id] = user.id
  # find = User.find_by_id(session[:user_id])
   
@@ -32,5 +35,11 @@ end
   redirect_to login_url, :notice => "Logged out"
 
   end
+  def createfacebook
+  auth = request.env["omniauth.auth"]
+  user = User.where(:provider => auth['provider'], :uid => auth['uid']).first || User.create_with_omniauth(auth)
+  session[:user_id] = user.id
+  redirect_to root_url, :notice => "Signed in!"
+end
 end
 

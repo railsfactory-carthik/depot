@@ -12,7 +12,9 @@ class ApplicationController < ActionController::Base
     def user_authorize
      
         find= User.find_by_id(session[:user_id])
-      
+        p 111111111111111111111111111111
+         p find.role
+         p 111111111111111111111111111111
       if(!find.role)
       
        redirect_to store_index_url

@@ -1,6 +1,6 @@
 Depot::Application.routes.draw do
   resources :orders
-
+  match '/auth/:provider/callback' => 'sessions#createfacebook'
 
   #get "admin/index" => 'admin#index'
   controller :sessions do
