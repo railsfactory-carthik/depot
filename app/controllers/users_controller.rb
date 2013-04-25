@@ -41,8 +41,9 @@ class UsersController < ApplicationController
   # POST /users
   # POST /users.json
   def create
-    @user = User.new(params[:user])
-
+        p 7777777777777777777777
+p params[:user]
+    p @user = User.new(params[:user])
     respond_to do |format|
       if @user.save
         format.html { redirect_to(users_url, :notice => "User #{@user.name} was successfully created." ) }
