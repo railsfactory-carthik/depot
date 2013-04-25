@@ -41,11 +41,22 @@ class UsersController < ApplicationController
   # POST /users
   # POST /users.json
   def create
-   access_token = Base64.encode64("#{params[:user][:name]},#{params[:user][:password]}")
-   hash_password = Digest::SHA1.hexdigest("#{params[:user][:name]},#{params[:user][:password]}")
-   @user = User.new(:name => params[:user][:name], :password => hash_password, :password_confirmation => hash_password, :access_token => access_token)  
+        p 7777777777777777777777
+        
+p params[:user]
+    #~ p @user = User.new(params[:user])
+    
+    
+    @student = User.new(params[:user])
+    @student.name = params[:user][:name]
+
+   # @student.email = params[:user][:email]
+
+    @student.salt = BCrypt::Engine.generate_salt
+    @student.password_hash = BCrypt::Engine.hash_secret(params[:user][:password], @student.salt)
+    
     respond_to do |format|
-      if @user.save
+      if @student.save
         format.html { redirect_to(users_url, :notice => "User #{@user.name} was successfully created." ) }
         format.json { render json: @user, status: :created, location: @user }
       else

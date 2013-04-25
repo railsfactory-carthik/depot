@@ -3,5 +3,9 @@ class StoreController < ApplicationController
 
   def index
   @products = Product.all
-  end
+end
+
+def contact
+  
+end
 end

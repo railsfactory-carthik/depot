@@ -1,0 +1,7 @@
+@student = User.new
+    @student.name = params[:user][:name]
+
+   # @student.email = params[:user][:email]
+
+    @student.salt = BCrypt::Engine.generate_salt
+    @student.password_hash = BCrypt::Engine.hash_secret(params[:user][:password], @student.salt)

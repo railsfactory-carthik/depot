@@ -5,21 +5,26 @@ class SessionsController < ApplicationController
   end
 
   def create
-    p 1111111111111111111111111111111111
+   p 1111111111111111111111111111111111
 
+p params
+p 44444444444
   if user = User.authenticate(params[:name], params[:password])
      
   session[:user_id] = user.id
  # find = User.find_by_id(session[:user_id])
   
   #p find
+  p 555555555555555555555555555555555555555
   p session[:user_id]      = user.id
      session[:user_name] = user.name
-     session[:user_role]    = user.role
-    if(session[:user_role] == 'admin')
-            redirect_to products_url
-     else
-        redirect_to store_index_url
+     p 111111111111111111111111111111
+     p  session[:user_role]    = user.role
+     p  1111111111111111
+    if(!session[:user_role] == 'admin')
+            redirect_to store_index_url
+    # else
+      #  redirect_to store_index_url
    end
   
   else

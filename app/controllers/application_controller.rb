@@ -2,6 +2,7 @@ class ApplicationController < ActionController::Base
   before_filter :authorize 
   protect_from_forgery
   private
+  #@user = User.find(params[:id])
    def current_cart
    Cart.find(session[:cart_id])
    rescue ActiveRecord::RecordNotFound
