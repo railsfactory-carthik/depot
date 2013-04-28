@@ -55,7 +55,7 @@ end
       if @order.save
         Cart.destroy(session[:cart_id])
 	session[:cart_id] = nil
-	format.html { redirect_to(store_index_url, :notice =>
+	format.html { redirect_to(paymentspayment_url, :notice =>
 	'Thank you for your order.' ) }
 	format.xml { render :xml => @order, :status => :created,
 	:location => @order }

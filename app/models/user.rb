@@ -1,10 +1,11 @@
 require 'digest/sha2'
 class User < ActiveRecord::Base
-  attr_reader :password
-  attr_accessor :password_confirmation
-  attr_accessible :name, :password, :password_confirmation, :hashed_password, :salt, :role,  :email
-validates :name, :presence => true, :uniqueness => true
+
+#validates :name, :presence => true, :uniqueness => true
 #validates :password, :confirmation => true
+#~ attr_accessor :password_confirmation, :name
+#~ attr_reader :password
+attr_accessible :name, :password, :password_confirmation, :hashed_password, :salt, :role,  :email, :access_token
 #validate :password_must_be_present
 after_destroy :ensure_an_admin_remains
 
@@ -29,9 +30,11 @@ end
   class << self
    # p 2222222222222222222222222222222
     def authenticate(name, password)
-      #p 222222222222222222222222222222222222
+      p password
+      p 222222222222222222222222222222222222
       if user = find_by_name(name)
-      if user.hashed_password == encrypt_password(password, user.salt)
+        user_password = Digest::SHA1.hexdigest("#{name},#{password}")
+      if user.password == user_password
       user
       end
     end

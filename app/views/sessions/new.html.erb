@@ -1,22 +1,29 @@
-<h1>Sessions#new</h1>
-<p>Find me in app/views/sessions/new.html.erb</p>
+
 <div class="depot_form">
 <%= form_tag do %>
 <fieldset>
-<legend>Please Log In</legend>
-<div>
-<label for="name">Name:</label>
-<%= text_field_tag :name, params[:name] %>
-</div>
-<div>
-<label for="password">Password:</label>
-<%= password_field_tag :password, params[:password] %>
-</div>
-<div>
-<%= submit_tag "Login" %>
-<%= link_to 'register' ,new_user_url%>
-</div>
+<legend>Enter Uname and Password</legend>
+<table align="left">
+<tr>
+<td>
+Name</td>
+<td><%= text_field_tag :name, params[:name] %></td></tr>
+<tr>
+<td>
+Password</td>
+<td><%= password_field_tag :password, params[:password] %></td>
+</tr>
+<tr>
+<td>
+<%= submit_tag "Login" %></td>
+
+<td>
+<%= link_to 'New User?' ,new_user_url%></tr>
+<tr>
+<td>
+<%= link_to 'login using Facebook ID', '/auth/facebook' %></td>
+</tr>
 </fieldset>
 <% end %>
-</div>
-<%= link_to 'Sign in with Facebook', '/auth/facebook' %>
+
+

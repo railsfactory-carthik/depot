@@ -41,8 +41,9 @@ class UsersController < ApplicationController
   # POST /users
   # POST /users.json
   def create
-    @user = User.new(params[:user])
-
+   access_token = Base64.encode64("#{params[:user][:name]},#{params[:user][:password]}")
+   hash_password = Digest::SHA1.hexdigest("#{params[:user][:name]},#{params[:user][:password]}")
+   @user = User.new(:name => params[:user][:name], :password => hash_password, :password_confirmation => hash_password, :access_token => access_token)  
     respond_to do |format|
       if @user.save
         format.html { redirect_to(users_url, :notice => "User #{@user.name} was successfully created." ) }
@@ -59,6 +60,8 @@ class UsersController < ApplicationController
   # PUT /users/1.json
   def update
     @user = User.find(params[:id])
+
+
 
     respond_to do |format|
       if @user.update_attributes(params[:user])

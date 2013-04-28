@@ -10,28 +10,36 @@
  <body id="store">
  <div id="banner">
 
-<%= @page_title || "E - Purchasing" %>
+<%#= image_tag('onshop1.jpeg', :height => "20px") %>
+<%= image_tag("home1.png", :height => "30px", :width => "300px") %>
+<%= @page_title || "Shopping @ one click" %>
  </div>
 <div id="columns">
- <div id="side">
+ <!--<div id="side">
  <% if @cart %>
 <%#= hidden_div_if(@cart.line_items.empty?, :id => "cart" ) do %>
 <%#= render @cart %>
 <% end %>
 <% #end %>
-<% if session[:user_id] %>
-		<br />
-		<%= link_to 'Orders', orders_path %><br />
-		<%= link_to 'Products', products_path %><br />
-		<%= link_to 'Users',
-		users_path
-		%><br />
-		<br />
-		<%= button_to 'Logout', logout_path, :method => :delete %>
-<% end %>
-
- </div>
+ </div>-->
  <div id="main">
+<div class="main-links">
+<% if session[:user_id] %>
+  <%if session[:user_user]=='admin' %>
+		<%= link_to 'Orders', orders_path %>
+		<%= link_to 'Products', products_path %>
+		<%= link_to 'Users',users_path%>
+    <%= button_to 'Logout', logout_path, :method => :delete %>
+   <%else%>
+       <%=%>
+          <%=link_to 'purchase' ,store_index_url%>
+       <%= link_to 'Profile', user_path(session[:user_id]) %>
+       <a href="<%= store_contact_path %>">contact</a>
+       <%#=link_to 'contact us', home/trainee1/Desktop/car/depot1/depot/app/views/index1.html%>
+		<%= button_to 'Logout', logout_path, :method => :delete %>
+    <%end%>
+<% end %>
+</div>
  <%= yield %>
  </div>
 </div>
