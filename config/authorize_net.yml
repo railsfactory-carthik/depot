@@ -1,0 +1,8 @@
+default:
+  api_login_id: 9z45NCdh
+  api_transaction_key: 33CqqW62E72Cd8TC
+  merchant_hash_value: 9z45NCdh
+
+development: 
+test: 
+production: 
