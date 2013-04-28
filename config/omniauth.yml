@@ -2,5 +2,5 @@ development:
   fb_client_id: 334707706652771
   fb_client_secret: 79abe55485765ea3d0bfbd2f8d9132f7
 production:
-  fb_client_id: 334707706652771
-  fb_client_secret: 79abe55485765ea3d0bfbd2f8d9132f7
+  fb_client_id: 332917030145300
+  fb_client_secret: 6cc0b8343631c5bc79bc322608904392
