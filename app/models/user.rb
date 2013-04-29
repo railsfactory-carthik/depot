@@ -1,13 +1,11 @@
 require 'digest/sha2'
 class User < ActiveRecord::Base
-
-#validates :name, :presence => true, :uniqueness => true
-#validates :password, :confirmation => true
-#~ attr_accessor :password_confirmation, :name
-#~ attr_reader :password
-attr_accessible :name, :password, :password_confirmation, :hashed_password, :salt, :role,  :email, :access_token
-#validate :password_must_be_present
-after_destroy :ensure_an_admin_remains
+validates :name, :presence => true, :uniqueness => true
+validates :password, :confirmation => true
+attr_accessor :password_confirmation
+attr_reader :password
+validate :password_must_be_present
+attr_accessible :name, :password, :password_confirmation, :access_token, :role
 
 def ensure_an_admin_remains
 raise "Can't delete last user" if User.count.zero?
@@ -24,43 +22,34 @@ def self.create_with_omniauth(auth)
   end
 end
 
-
-
-
-  class << self
-   # p 2222222222222222222222222222222
-    def authenticate(name, password)
-      p password
-      p 222222222222222222222222222222222222
-      if user = find_by_name(name)
-        user_password = Digest::SHA1.hexdigest("#{name},#{password}")
-      if user.password == user_password
-      user
-      end
-    end
-  end
-
-  
-  def encrypt_password(password, salt)
-  Digest::SHA2.hexdigest(password + "wibble" + salt)
-  end
-
+class << self
+def authenticate(name, password)
+  p user = find_by_name(name)
+  p user.hashed_password
+  p encrypt_password(password, user.salt)
+if user = find_by_name(name)
+if user.hashed_password != encrypt_password(password, user.salt)
+user
+end
+end
+end
+def encrypt_password(password, salt)
+Digest::SHA2.hexdigest(password + "wibble" + salt)
+end
+end
 # 'password' is a virtual attribute
-  def password=(password)
-    @password = password if password.present?
-      generate_salt
-      self.hashed_password = self.class.encrypt_password(password, salt)
-    end  
-
-
+def password=(password)
+@password = password
+if password.present?
+generate_salt
+self.hashed_password = self.class.encrypt_password(password, salt)
+end
+end
 private
-  def password_must_be_present
-  errors.add(:password, "Missing password" ) unless hashed_password.present?
+def password_must_be_present
+errors.add(:password, "Missing password" ) unless hashed_password.present?
 end
-
-  def generate_salt
-  self.salt = self.object_id.to_s + rand.to_s
-end
-
+def generate_salt
+self.salt = self.object_id.to_s + rand.to_s
 end
 end

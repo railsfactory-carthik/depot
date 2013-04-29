@@ -13,7 +13,7 @@ p 44444444444
      
   session[:user_id] = user.id
  # find = User.find_by_id(session[:user_id])
-  
+  p user
   #p find
   p 555555555555555555555555555555555555555
   p session[:user_id]      = user.id
@@ -21,10 +21,10 @@ p 44444444444
      p 111111111111111111111111111111
      p  session[:user_role]    = user.role
      p  1111111111111111
-    if(!session[:user_role] == 'admin')
-            redirect_to store_index_url
-    # else
-      #  redirect_to store_index_url
+    if !(session[:user_role] == 'admin')
+      redirect_to store_index_url
+    else
+      redirect_to products_path
    end
   
   else
