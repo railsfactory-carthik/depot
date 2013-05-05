@@ -17,6 +17,7 @@ class CartsController < ApplicationController
   def show
    begin
     @cart = Cart.find(params[:id])
+    session[:total_price]=@cart.total_price
     rescue ActiveRecord::RecordNotFound
     logger.error "Attempt to access invalid cart #{params[:id]}"
     redirect_to store_index_url, :notice => 'Invalid cart'

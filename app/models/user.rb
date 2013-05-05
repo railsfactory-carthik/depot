@@ -1,11 +1,11 @@
 require 'digest/sha2'
 class User < ActiveRecord::Base
 validates :name, :presence => true, :uniqueness => true
-validates :password, :confirmation => true
-attr_accessor :password_confirmation
+validates :password, :confirmation => true, :if =>  Proc.new {|at| at.step != "1"}
+attr_accessor :password_confirmation, :step
 attr_reader :password
-validate :password_must_be_present
-attr_accessible :name, :password, :password_confirmation, :access_token, :role
+validate :password_must_be_present, :if =>  Proc.new {|at| at.step != "1"}
+attr_accessible :name, :password, :password_confirmation, :access_token, :role, :step
 
 def ensure_an_admin_remains
 raise "Can't delete last user" if User.count.zero?
@@ -13,6 +13,7 @@ end
 
 def self.create_with_omniauth(auth)
   create! do |user|
+    user.step = "1"
     user.provider = auth['provider']
     user.uid = auth['uid']
     if auth['info']

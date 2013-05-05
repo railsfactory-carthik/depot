@@ -21,7 +21,7 @@ p 44444444444
      p 111111111111111111111111111111
      p  session[:user_role]    = user.role
      p  1111111111111111
-    if !(session[:user_role] == 'admin')
+    unless(session[:user_role] == 'admin')
       redirect_to store_index_url
     else
       redirect_to products_path

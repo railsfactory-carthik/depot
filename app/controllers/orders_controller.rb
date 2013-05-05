@@ -53,8 +53,7 @@ end
 
     respond_to do |format|
       if @order.save
-        Cart.destroy(session[:cart_id])
-	session[:cart_id] = nil
+        
 	format.html { redirect_to(paymentspayment_url, :notice =>
 	'Thank you for your order.' ) }
 	format.xml { render :xml => @order, :status => :created,

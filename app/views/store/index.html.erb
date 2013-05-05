@@ -1,21 +1,44 @@
 <% if notice %>
 <p id="notice"><%= notice %></p>
 <% end %>
-<h1>Choose UR Dream ones</h1>
-<table>
+<h1>Choose UR Dream ones</h1> <p align=right>Easy search <select>
+  <option value="sports">sports</option>
+  <option value="book">book</option>
+  <option value="mobile">mobile</option>
+  <option value="wallets">wallets</option>
+</select> </p>
 
+<table border=1 align=center>
 <% @products.each do |product| %>
+
 <div class="entry">
-<tr><td>
-<%= image_tag(product.image_url, :height => "20px") %></td>
-<td><h3><%= product.title %></h3></td>
+
+<tr><td rowspan=4>
+<%= image_tag(product.image_url, :height => "58px", :width => "70px") %></td>
+</tr>
+
+<tr>
+<td> Product: </td>
+<td><%= product.title %></td>
+</tr>
+
+<tr>
+<td> Description: </td>
 <td><%=sanitize product.description %></td>
+</tr>
+
 <div class="price_line">
-<span class="price"><td><%= number_to_currency(product.price) %></td></span>
-<td><%= button_to 'Add to Cart', line_items_path(:product_id => product) %></td></tr>
+<tr>
+<span class="price">
+<td>Price:</td>
+ <td><%= number_to_currency(product.price) %></td>
+</tr>
+</span>
+
+<tr align=center><td colspan=3><%= button_to 'Add to Cart', line_items_path(:product_id => product) %></td></tr>
 </div>
 </div>
 
 <% end %>
-</table>
 
+</table>

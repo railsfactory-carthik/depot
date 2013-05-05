@@ -1,7 +1,7 @@
 <!DOCTYPE html>
  <html>
  <head>
- <title>E - Purchasing</title>
+ <title>Online - Shopping</title>
 <%= stylesheet_link_tag "scaffold" %>
  <%= stylesheet_link_tag "depot" , :media => "all" %>
  <%= javascript_include_tag :application %>
@@ -9,9 +9,9 @@
  </head>
  <body id="store">
  <div id="banner">
-<%#= image_tag('onshop1.jpeg', :height => "20px") %>
-<%= image_tag("home1.png", :height => "30px", :width => "300px") %>
-<%= @page_title || "Shopping @ one click" %>
+<%#= image_tag('onshop.jpeg', :height => "20px", :width => "300px") %>
+<%= image_tag("logo.gif", :height => "70px", :width => "1300px") %>
+<p align=right><%= @page_title || "Shopping @ one click" %></p>
  </div>
 <div id="columns">
  <!--<div id="side">
@@ -24,7 +24,7 @@
  <div id="main">
 <div class="main-links">
 <% if session[:user_id] %>
-  <%if session[:user_user]=='admin' %>
+  <%if session[:user_role]=='admin' %>
 		<%= link_to 'Orders', orders_path %>
 		<%= link_to 'Products', products_path %>
 		<%= link_to 'Users',users_path%>
@@ -33,7 +33,7 @@
        <%=%>
           <%=link_to 'purchase' ,store_index_url%>
        <%= link_to 'Profile', user_path(session[:user_id]) %>
-       <a href="<%= store_contact_path %>">contact</a>
+       <%= link_to 'contact', store_contact_path%>
        <%#=link_to 'contact us', home/trainee1/Desktop/car/depot1/depot/app/views/index1.html%>
 		<%= button_to 'Logout', logout_path, :method => :delete %>
     <%end%>
